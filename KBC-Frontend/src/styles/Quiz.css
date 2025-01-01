@@ -1,0 +1,410 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f1f1f1;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Quiz Container */
+.quiz-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f7f7f7;
+}
+
+.quiz-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1000px;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* General Styling */
+body {
+  font-family: 'Arial', sans-serif;
+  color: #000; /* Set default text color to black */
+}
+
+/* Question Area */
+.question-area {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.question-text {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #000; /* Black text color for the question */
+}
+
+.options {
+  margin-bottom: 20px;
+}
+
+.option-label {
+  display: block;
+  padding: 10px;
+  margin-bottom: 8px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: #000; /* Black text color for options */
+}
+
+.option-label:hover {
+  background-color: #e0e0e0;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+.correct {
+  background-color: #d4edda;
+}
+
+.incorrect {
+  background-color: #f8d7da;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Submit Button */
+.submit-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px; /* Adds space below the submit button */
+
+}
+
+.submit-button:disabled {
+  background-color: #ccc;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+/* Inline Feedback */
+.inline-feedback {
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+.inline-feedback span {
+  font-weight: bold;
+}
+
+.inline-feedback span.correct {
+  color: green;
+}
+
+.inline-feedback span.incorrect {
+  color: red;
+}
+
+/* Lifeline Buttons */
+.lifeline-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  padding: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; /* Smooth transitions for transform, box-shadow, and opacity */
+}
+
+.lifeline-button:hover {
+  transform: scale(1.1); /* Slightly increase the size of the button on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Add a subtle shadow on hover */
+  opacity: 0.9; /* Slightly reduce opacity for a pressing effect */
+}
+
+.lifeline-button:active {
+  transform: scale(1); /* Ensure the button returns to normal size when clicked */
+  opacity: 1; /* Full opacity when clicked */
+}
+
+
+.lifeline-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.lifeline-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.lifeline-button img {
+  width: 60px;
+  height: auto
+}
+
+/* Question Ladder */
+.questions-ladder {
+  width: 200px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.questions-ladder ol {
+  list-style: none;
+  padding-left: 0;
+}
+
+.ladder-item {
+  padding: 8px;
+  margin-bottom: 10px;
+  background-color: #e9ecef;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #000; /* Black text color for ladder items */
+}
+
+.ladder-item.current-question {
+  background-color: #007bff;
+  color: white;
+}
+
+.ladder-item:hover {
+  background-color: #c6d0d8;
+}
+
+/* Button for Navigation */
+.next-button, .complete-button {
+  display: block;
+  margin: 20px auto 0;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.next-button:hover, .complete-button:hover {
+  background-color: #0056b3;
+}
+
+.complete-button {
+  background-color: #28a745;
+}
+
+.complete-button:hover {
+  background-color: #218838;
+}
+
+/* Loading State */
+/* Loading screen styles */
+.loading {
+  position: fixed; /* Ensure it covers the whole screen */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black; /* Black background */
+  color: white; /* White text */
+  display: flex;
+  flex-direction: column; /* Stack spinner and text vertically */
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  z-index: 1000; /* Ensure it appears on top */
+  opacity: 0;
+  animation: fadeIn 1s forwards; /* Fade-in effect */
+  text-align: center; /* Center align text */
+}
+
+/* Animation for fade-in effect */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Stylish loading spinner */
+.loading-spinner {
+  border: 8px solid rgba(255, 255, 255, 0.2); /* Light border with some transparency */
+  border-top: 8px solid #00bcd4; /* Turquoise color for top border */
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1.5s linear infinite; /* Spin animation */
+  box-shadow: 0 0 15px rgba(0, 188, 212, 0.7); /* Glow effect around the spinner */
+  margin-bottom: 20px; /* Space between spinner and text */
+}
+
+/* Spinner animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading Text with animated dots */
+.loading-text {
+  display: inline-block;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.dot {
+  opacity: 0;
+  animation: dot-blink 1.5s infinite;
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 1s;
+}
+
+/* Keyframes for dot blink effect */
+@keyframes dot-blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.submit-button.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.option-label.disabled:hover {
+  pointer-events: none;
+}
+
+/* Prevent page scroll */
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Circle background and progress styles */
+.circle-chart {
+  transform: rotate(-90deg);
+}
+
+.circle-background {
+  stroke: #eee;
+}
+
+.circle-progress {
+  stroke: #4CAF50;
+  
+  stroke-linecap: round;
+  transition: stroke-dasharray 1s ease;
+}
+
+/* Fireworks Styles */
+@keyframes firework {
+  0% {
+    opacity: 1;
+    transform: scale(0.1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+.firework {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  animation: firework 1s ease-out infinite;
+  pointer-events: none;
+}
+
+.firework:nth-child(odd) {
+  background-color: red;
+}
+
+.firework:nth-child(even) {
+  background-color: blue;
+}
+
+.fireworks-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.timer{
+  background-color: #007bff;
+  font-size: 1.5rem;
+}
+
+.timer.text{
+  color: #000;
+}
+
+.timer.blink {
+  animation: blink-animation 1s infinite;
+  background-color: darkred;
+}
+
+@keyframes blink-animation {
+  50% {
+    opacity: 0;
+  }
+}

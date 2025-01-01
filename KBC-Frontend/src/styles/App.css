@@ -1,0 +1,34 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #0d0d0d;
+    color: #ede2e2;
+    text-align: center;
+  }
+  
+  button {
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #1c87c9;
+  }
+  
+  h1 {
+    color: #1c87c9;
+    text-shadow: 2px 2px 4px #aaa;
+  }
+  
+  .quiz, .results {
+    padding: 20px;
+    border: 2px solid #1c87c9;
+    border-radius: 10px;
+    display: inline-block;
+    margin-top: 20px;
+  }
+  
+  label {
+    display: block;
+    margin: 10px 0;
+  }
+  
+  

@@ -1,0 +1,53 @@
+openapi: "3.0.0"
+info:
+  title: "KBC App API"
+  version: "1.0.0"
+  description: "API for KBC App with Chocolate Rewards"
+servers:
+  - url: "http://localhost:5000"
+    description: "Local server"
+paths:
+  /api/questions:
+    get:
+      summary: "Get all questions"
+      responses:
+        200:
+          description: "A list of questions"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Question"
+    post:
+      summary: "Add a new question"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Question"
+        required: true
+      responses:
+        201:
+          description: "Question created successfully"
+  /api/questions/generate:
+    post:
+      summary: "Generate questions using OpenAI"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                topic:
+                  type: "string"
+                difficulty:
+                  type: "string"
+        required: true
+      responses:
+        200:
+          description: "Generated questions"
+          content:
+            application/json:
+              schema:
+                type: "array"
