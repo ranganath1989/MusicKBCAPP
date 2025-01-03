@@ -319,7 +319,7 @@ const Quiz = () => {
               )}
               {!usedPhoneAFriend && !areLifelinesDisabled && (
                 <button className="lifeline-button" onClick={handlePhoneAFriend}>
-                  <img src="/assets/images/phone_a_friend.webp" alt="Phone a Friend" />
+                  <img src="/assets/images/phone_a_friend.jpg" alt="Phone a Friend" />
                 </button>
               )}
             </div>
