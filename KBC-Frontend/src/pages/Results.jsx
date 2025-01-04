@@ -79,14 +79,40 @@ const Results = () => {
     navigate("/");
   };
 
+  // Calculate chocolates based on score percentage
+  const calculateChocolates = () => {
+    if (scorePercentage === 100) return 4;
+    if (scorePercentage >= 80) return 3;
+    if (scorePercentage >= 60) return 2;
+    if (scorePercentage >= 50) return 1;
+    return 0;
+  };
+
+  const chocolates = calculateChocolates();
+
   return (
     <div className="results bg-gradient-to-r from-indigo-600 to-purple-700 min-h-screen text-white flex flex-col items-center justify-center py-16 px-6 relative overflow-hidden">
-      <h1 className="text-6xl font-extrabold mb-8 text-center animate__animated animate__fadeIn">
-        🎉 Congratulations! 🎉
-      </h1>
-      <p className="text-3xl mb-10 text-center">
-        You earned <span className="text-yellow-400 font-bold">{score}</span> chocolates out of {totalQuestions}!
-      </p>
+      {/* Conditionally render the heading and message */}
+      {chocolates > 0 ? (
+        <>
+          <h1 className="text-6xl font-extrabold mb-8 text-center animate__animated animate__fadeIn">
+            🎉 Congratulations! 🎉
+          </h1>
+          <p className="text-3xl mb-10 text-center">
+            You earned <span className="text-yellow-400 font-bold">{chocolates}</span>{" "}
+            {chocolates === 1 ? "chocolate" : "chocolates"} based on your performance!
+          </p>
+        </>
+      ) : (
+        <>
+          <h1 className="text-6xl font-extrabold mb-8 text-center animate__animated animate__fadeIn">
+            Better Luck Next Time!
+          </h1>
+          <p className="text-3xl mb-10 text-center">
+            You didn't earn any chocolates this time. Keep practicing and try again!
+          </p>
+        </>
+      )}
 
       {/* Circle Progress */}
       <div className="flex flex-col items-center justify-center mb-12 relative w-32 h-32">
@@ -144,12 +170,6 @@ const Results = () => {
         >
           Restart Quiz
         </button>
-        {/* <button
-          onClick={isMusicPlaying ? handleStopMusic : handlePlayMusic}
-          className="bg-green-500 text-white py-4 px-10 rounded-lg font-semibold shadow-lg hover:bg-green-400 transition duration-300 transform hover:scale-105"
-        >
-          {isMusicPlaying ? "Stop Music" : "Play Music"}
-        </button> */}
       </div>
     </div>
   );

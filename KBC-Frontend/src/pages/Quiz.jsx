@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Quiz.css';
 
@@ -20,6 +20,7 @@ const Quiz = () => {
   const [isLifelineUsed, setIsLifelineUsed] = useState(false);
   const [timer, setTimer] = useState(30); // Timer state for each question
   const [isTimerRunning, setIsTimerRunning] = useState(true); // Flag to control timer
+  const audioRef = useRef(null);
 
 
 
@@ -39,6 +40,7 @@ const Quiz = () => {
             topic: selectedMusic,
             difficulty: 'basic',
             questionsCount: 10,
+            selectedMusic:selectedMusic
           }),
         });
         const data = await response.json();
@@ -61,10 +63,25 @@ const Quiz = () => {
     const currentQuestion = questions[currentIndex];
     const questionText = currentQuestion.question;
     const options = currentQuestion.options.join(', '); // Join options with commas for easier reading
-    console.log('Reading question:', questionText); // Log to see if this function is called
+    //console.log('Reading question:', questionText); // Log to see if this function is called
 
     const utterance = new SpeechSynthesisUtterance(`${questionText} Options are: ${options}`);
+    // Fetch voices and set a custom voice
+    const voices = window.speechSynthesis.getVoices();
+ 
+    const betterVoice = voices.find(voice => voice.lang === 'en-GB' && voice.name.includes('Google'));
+  
+    if (betterVoice) {
+      utterance.voice = betterVoice;
+    }
+
+    // Optional: Customize pitch, rate, and volume
+    utterance.pitch = 1.1; // Slightly higher pitch
+    utterance.rate = 1; // Normal speed
+    utterance.volume = 0.9; // Slightly reduced volume
     window.speechSynthesis.speak(utterance);
+
+
   };
 
   const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -130,6 +147,28 @@ const Quiz = () => {
     // }, 2000); // Delay to show "time's up" message
   };
 
+    // Add a function to play the clap sound
+  const playSound = (isCorrect) => {
+    console.log("isCorrect ", isCorrect);
+    //if (!audioRef.current) {
+      // Determine which sound to play based on the condition
+      const soundPath = isCorrect
+        ? '/assets/music/claps.mp3'  // Claps sound for correct answers
+        : '/assets/music/buzz.mp3'; // Buzz sound for wrong answers
+      console.log("soundPath ", soundPath);
+      audioRef.current = new Audio(soundPath);
+    //}
+    audioRef.current.play();
+  };
+
+  const stopClapSound = () => {
+    if(audioRef.current){
+      audioRef.current.pause();
+    }
+  }
+
+
+
   const handleSubmit = () => {
     setIsTimerRunning(false); // Stop the timer
     window.speechSynthesis.cancel();
@@ -143,6 +182,7 @@ const Quiz = () => {
     if (isOptionCorrect) {
       setScore(score + 1);
     }
+    playSound(isOptionCorrect); 
 
     setFeedback([
       ...feedback,
@@ -155,6 +195,7 @@ const Quiz = () => {
   };
 
   const handleNextQuestion = () => {
+    stopClapSound();
     setSelectedOption(null);
     setAnswerSubmitted(false);
     setCurrentIndex(currentIndex + 1);
@@ -167,6 +208,7 @@ const Quiz = () => {
   };
 
   const handleComplete = () => {
+    stopClapSound();
     navigate('/results', {
       state: {
         score,
