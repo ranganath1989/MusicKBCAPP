@@ -27,7 +27,7 @@ const Home = () => {
         >
           <option value="Carnatic music">Carnatic Music</option>
           <option value="Hindustani classical music">Hindustani Music</option>
-          <option value="general music">Western Music</option>
+          <option value="general music">General Music</option>
         </select>
       </label>
       <button
